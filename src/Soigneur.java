@@ -15,7 +15,7 @@ public class Soigneur extends Employe {
      */
     @Override
     public String effectuerTache(Animal animal) {
-        return animal.soinQuotidien();
+        return animal.soinQuotidien() + " de " + animal.getNom();
     }
 
 }

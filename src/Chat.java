@@ -23,7 +23,7 @@ public class Chat extends Animal {
      */
     @Override
     public String soinQuotidien() {
-        return "Nettoyage de la litière";
+        return "nettoie la litière";
     }
 
 }

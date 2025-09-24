@@ -23,7 +23,7 @@ public class Lapin extends Animal {
      */
     @Override
     public String soinQuotidien() {
-        return "Vérification foin";
+        return "vérifie le foin";
     }
 
 }

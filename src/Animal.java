@@ -17,6 +17,13 @@ public abstract class Animal {
     }
 
     /**
+     * @return le nom de l'animal
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
      * @return l'état de santé de l'animal
      */
     public étatSanté getSanté() {
