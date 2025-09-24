@@ -1,7 +1,7 @@
 public class Chat extends Animal {
 
     /**
-     * Créer un chat
+     * Constructeur d'un chat
      * @param nom Nom du chat
      * @param age Age du chat
      * @param santé Etat de santé du chat

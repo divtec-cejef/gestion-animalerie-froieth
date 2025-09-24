@@ -1,7 +1,7 @@
 public class Chien extends Animal {
 
     /**
-     * Créer un chien
+     * Constructeur d'un chien
      * @param nom Nom du chien
      * @param age Age du chien
      * @param santé Etat de santé du chien

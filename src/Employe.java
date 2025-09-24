@@ -6,7 +6,7 @@ public abstract class Employe {
     private String rôle;
 
     /**
-     * Créer un employé
+     * Constructeur d'un employé
      * @param nom Le nom de l'employé
      * @param prenom Le prénom de l'employé
      * @param salaire Le salaire de l'employé
@@ -19,6 +19,6 @@ public abstract class Employe {
         this.rôle = rôle;
     }
 
-    public abstract String effectuerTache();
+    public abstract String effectuerTache(Animal animal);
 
 }

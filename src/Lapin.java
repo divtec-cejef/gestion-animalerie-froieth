@@ -1,7 +1,7 @@
 public class Lapin extends Animal {
 
     /**
-     * Créer un lapin
+     * Constructeur d'un lapin
      * @param nom Nom du lapin
      * @param age Age du lapin
      * @param santé Etat de santé du lapin
@@ -15,7 +15,7 @@ public class Lapin extends Animal {
      */
     @Override
     public String faireBruit() {
-        return "JSP!";
+        return "Squick!";
     }
 
     /**
