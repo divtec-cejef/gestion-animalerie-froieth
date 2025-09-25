@@ -19,6 +19,14 @@ public abstract class Employe {
         this.rôle = rôle;
     }
 
+    /**
+     * @return une description textuel de l'empployé
+     */
+    @Override
+    public String toString() {
+        return "Nom : " + prenom + " " + nom + "\nRôle : " + rôle + "\nSalaire : " + salaire + ".-";
+    }
+
     public abstract String effectuerTache(Animal animal);
 
 }

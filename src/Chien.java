@@ -23,7 +23,7 @@ public class Chien extends Animal {
      */
     @Override
     public String soinQuotidien() {
-        return "brosse le pelage";
+        return "Brosse le pelage";
     }
 
 }

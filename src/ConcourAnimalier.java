@@ -1,16 +1,19 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConcourAnimalier {
 
     private String nom;
     private String lieu;
     private int capacitéMax;
-    private Animal[] animalsInscrits =  new Animal[capacitéMax];
+    private List<Animal> animalsInscrits = new ArrayList<>();
 
     /**
      * Constructeur d'un concour animalier
-     * @param nom Nom du concour
-     * @param lieu Lieu du concour
+     *
+     * @param nom         Nom du concour
+     * @param lieu        Lieu du concour
      * @param capacitéMax Capacité maximum du concour
      */
     public ConcourAnimalier(String nom, String lieu, int capacitéMax) {
@@ -21,26 +24,64 @@ public class ConcourAnimalier {
 
     /**
      * Permet d'inscrire un animal au concour
+     *
      * @param animal
      */
     public void inscrireAnimal(Animal animal) {
-        // Vérifie l'état de santé de l'animal à inscrire
-        if (animal.getSanté() == étatSanté.SAIN) {
+        boolean peutEtreInscrit = true;
 
-            // Parcour la liste pour voir si l'animal à inscrire est déjà inscrit
-            for(Animal anim : animalsInscrits){
+        if (animal == null || animal.getSanté() != étatSanté.SAIN || animalsInscrits.size() >= capacitéMax) {
+            peutEtreInscrit = false;
+        }
 
-                // Ajoute l'animal dans la première case vide
-                for (int i = 0; i < animalsInscrits.length; i++) {
-
-                    if (animalsInscrits[i] == null) {
-                        animalsInscrits[i] = animal;
-                    }
-
-                }
-
+        // Vérifie si l'animal est déjà inscrit
+        for (Animal a : animalsInscrits) {
+            if (animal.equals(a)) {
+                peutEtreInscrit = false;
             }
+        }
+
+        // Ajoute l'animal dans la première case vide
+        if (peutEtreInscrit) {
+            animalsInscrits.add(animal);
         }
     }
 
+    @Override
+    public String toString() {
+        String message = "Concour : " + nom + "\nLieu : " + lieu + "\n";
+
+        if (animalsInscrits.size() > 0) {
+            message += "Animaux inscrits : \n";
+            for (int i = 0; i < animalsInscrits.size(); i++) {
+                if (animalsInscrits.get(i) != null) {
+                    message += "\t" + animalsInscrits.get(i).getNom() + "\n";
+                }
+            }
+        }
+
+        return message;
+    }
+
+    public String lancerConcour() {
+        String message = "";
+        List<Animal> animalsInscritsTemp = new ArrayList<>();
+
+        for (int i = 0; i < animalsInscrits.size(); i++) {
+            if (animalsInscrits.get(i) != null) {
+                animalsInscritsTemp.add(animalsInscrits.get(i));
+            }
+        }
+
+        for (int i = 0; i < animalsInscrits.size(); i++) {
+
+            int indexAléa = (int) (Math.random() * animalsInscritsTemp.size());
+            Animal choisi = animalsInscritsTemp.remove(indexAléa);
+
+            if (choisi != null) {
+                message += (i + 1) + ") " + choisi.getNom() + "\n";
+            }
+        }
+        return message;
+    }
 }

@@ -12,14 +12,31 @@ public class Main {
 
         ArrayList<Employe> employes = new ArrayList<Employe>();
         employes.add(new Soigneur("Doe", "John", 4000));
-        employes.add(new Vétérinaire("Bond", "James", 5000));
+        employes.add(new Vétérinaire("Doe", "James", 5000));
+
+        ConcourAnimalier concour1 = new ConcourAnimalier("Premier Concour", "Porrentruy", 3);
+        for (int i = 0; i < animals.size(); i++) {
+            concour1.inscrireAnimal(animals.get(i));
+        }
+
 
         for (Employe employe : employes) {
-            console.afficher(employe.effectuerTache(animals.get(0)));
+            console.afficher(employe);
+            console.afficher("Tâche : " + employe.effectuerTache(animals.get(1)));
+
+            if(employe instanceof Vétérinaire) {
+                console.afficher("Etat santé de " + animals.get(1).getNom() + " après avoir été soigné : " + animals.get(1).getSanté().afficherEtatSanté());
+            }
+
+            console.afficherRetourLigne();
         }
 
 
 
+
+
+        console.afficher(concour1);
+        console.afficher(concour1.lancerConcour());
 
     }
 }

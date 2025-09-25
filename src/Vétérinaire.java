@@ -15,17 +15,14 @@ public class Vétérinaire extends Employe {
      */
     @Override
     public String effectuerTache(Animal animal) {
-        String message = "L'état de santé de " + animal.getNom() + " est passé de ";
         if(animal.getSanté() == étatSanté.SOIN_INTENSIF){
             animal.setSanté(étatSanté.SOIN_LEGER);
-            message += étatSanté.SOIN_INTENSIF.afficherEtatSanté();
         } else if(animal.getSanté() == étatSanté.SOIN_LEGER){
             animal.setSanté(étatSanté.SAIN);
-            message += étatSanté.SOIN_LEGER.afficherEtatSanté();
         } else {
             return "";
         }
-        return message + " à " + animal.getSanté().afficherEtatSanté();
+        return "Soigne " + animal.getNom();
     }
 
 }
