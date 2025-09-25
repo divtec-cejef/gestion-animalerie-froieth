@@ -3,6 +3,7 @@ public abstract class Animal {
     private String nom;
     private int age;
     private étatSanté santé;
+    private String race;
 
     /**
      * Constructeur d'un aimal
@@ -10,10 +11,19 @@ public abstract class Animal {
      * @param age Age de l'animal
      * @param santé Etat de santé de l'animal
      */
-    public Animal(String nom, int age, étatSanté santé){
+    public Animal(String nom, int age, étatSanté santé, String race) {
         this.nom = nom;
         this.age = age;
         this.santé = santé;
+        this.race = race;
+    }
+
+    @Override
+    public String toString() {
+        return  "\t\tNom : " + nom +
+                "\n\t\tRace : " + race +
+                "\n\t\tAge : " + age +
+                "\n\t\tÉtat de santé : " + santé.afficherEtatSanté();
     }
 
     /**
@@ -28,6 +38,13 @@ public abstract class Animal {
      */
     public étatSanté getSanté() {
         return santé;
+    }
+
+    /**
+     * @return la race de l'animal
+     */
+    public String getRace() {
+        return race;
     }
 
     /**

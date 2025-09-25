@@ -7,7 +7,7 @@ public class Chat extends Animal {
      * @param santé Etat de santé du chat
      */
     public Chat(String nom, int age, étatSanté santé){
-        super(nom, age, santé);
+        super(nom, age, santé, "chat");
     }
 
     /**
