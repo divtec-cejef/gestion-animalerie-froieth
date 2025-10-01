@@ -389,8 +389,7 @@ public class ConsoleIO {
         afficher(afficherTousLesAnimaux(animaux));
         afficherSansRetourLigne("\t\tAnimal à inscrire : ");
         Animal animalAInscrire = animaux.get(readNextInt() - 1);
-        concourAffecter.inscrireAnimal(animalAInscrire);
-        afficher("\t\t" + animalAInscrire.getNom() + " à été inscrit au concour \"" + concourAffecter.getNom() + "\"");
+        afficher(concourAffecter.inscrireAnimal(animalAInscrire));
     }
 
     /**

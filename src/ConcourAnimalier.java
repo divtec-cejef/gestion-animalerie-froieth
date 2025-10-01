@@ -10,7 +10,6 @@ public class ConcourAnimalier {
 
     /**
      * Constructeur d'un concour animalier
-     *
      * @param nom         Nom du concour
      * @param lieu        Lieu du concour
      * @param capacitéMax Capacité maximum du concour
@@ -31,27 +30,37 @@ public class ConcourAnimalier {
 
     /**
      * Permet d'inscrire un animal au concour
-     *
      * @param animal
      */
-    public void inscrireAnimal(Animal animal) {
+    public String inscrireAnimal(Animal animal) {
         boolean peutEtreInscrit = true;
+        String message = "\t\t";
 
         if (animal == null || animal.getSanté() != étatSanté.SAIN || animauxInscrits.size() >= capacitéMax) {
             peutEtreInscrit = false;
+            message += animal.getNom() + " ne peut pas être inscrit";
+            if(animal.getSanté() != étatSanté.SAIN) {
+                message += ", son état de santé n'est pas sain.";
+            } else if (animauxInscrits.size() >= capacitéMax){
+                message += ", le concour est plein.";
+            }
         }
 
         // Vérifie si l'animal est déjà inscrit
         for (Animal a : animauxInscrits) {
             if (animal.equals(a)) {
                 peutEtreInscrit = false;
+                message += animal.getNom() + " est déjà inscrit à ce concour.";
             }
         }
 
         // Ajoute l'animal dans la première case vide
         if (peutEtreInscrit) {
             animauxInscrits.add(animal);
+            message += "\t\t" + animal.getNom() + " à été inscrit au concour \"" + nom + "\"";
         }
+
+        return message;
     }
 
     @Override

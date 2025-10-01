@@ -63,7 +63,7 @@ public abstract class Animal {
     @Override
     public boolean equals(Object autre) {
         if (autre == null || autre.getClass().equals(this.getClass())) {
-            return false;
+            return true;
         }
         Animal autre2 = (Animal) autre;
         return this.nom.equals(autre2.nom) && this.nom == autre2.nom && this.age == autre2.age && this.santé == autre2.santé;
