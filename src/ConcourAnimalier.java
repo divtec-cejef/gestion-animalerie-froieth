@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ConcourAnimalier {
@@ -7,7 +6,7 @@ public class ConcourAnimalier {
     private String nom;
     private String lieu;
     private int capacitéMax;
-    private List<Animal> animalsInscrits = new ArrayList<>();
+    private List<Animal> animauxInscrits = new ArrayList<>();
 
     /**
      * Constructeur d'un concour animalier
@@ -22,6 +21,14 @@ public class ConcourAnimalier {
         this.capacitéMax = capacitéMax;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
     /**
      * Permet d'inscrire un animal au concour
      *
@@ -30,12 +37,12 @@ public class ConcourAnimalier {
     public void inscrireAnimal(Animal animal) {
         boolean peutEtreInscrit = true;
 
-        if (animal == null || animal.getSanté() != étatSanté.SAIN || animalsInscrits.size() >= capacitéMax) {
+        if (animal == null || animal.getSanté() != étatSanté.SAIN || animauxInscrits.size() >= capacitéMax) {
             peutEtreInscrit = false;
         }
 
         // Vérifie si l'animal est déjà inscrit
-        for (Animal a : animalsInscrits) {
+        for (Animal a : animauxInscrits) {
             if (animal.equals(a)) {
                 peutEtreInscrit = false;
             }
@@ -43,19 +50,21 @@ public class ConcourAnimalier {
 
         // Ajoute l'animal dans la première case vide
         if (peutEtreInscrit) {
-            animalsInscrits.add(animal);
+            animauxInscrits.add(animal);
         }
     }
 
     @Override
     public String toString() {
-        String message = "Concour : " + nom + "\nLieu : " + lieu + "\n";
-
-        if (animalsInscrits.size() > 0) {
-            message += "Animaux inscrits : \n";
-            for (int i = 0; i < animalsInscrits.size(); i++) {
-                if (animalsInscrits.get(i) != null) {
-                    message += "\t" + animalsInscrits.get(i).getNom() + "\n";
+        String message = "\t\tConcour : " + nom +
+                "\n\t\tLieu : " + lieu + "\n";
+        message += "\t\tAnimaux inscrits : ";
+        if (animauxInscrits.size() == 0) {
+            message += "aucun\n";
+        } else {
+            for (int i = 0; i < animauxInscrits.size(); i++) {
+                if (animauxInscrits.get(i) != null) {
+                    message += "\n\t\t\t" + animauxInscrits.get(i).getNom() + " (" + animauxInscrits.get(i).getRace() + ")";
                 }
             }
         }
@@ -67,19 +76,31 @@ public class ConcourAnimalier {
         String message = "";
         List<Animal> animalsInscritsTemp = new ArrayList<>();
 
-        for (int i = 0; i < animalsInscrits.size(); i++) {
-            if (animalsInscrits.get(i) != null) {
-                animalsInscritsTemp.add(animalsInscrits.get(i));
+        if (animauxInscrits.size() > 1) {
+
+            message += "\n\tClassement : ";
+
+            for (int i = 0; i < animauxInscrits.size(); i++) {
+                if (animauxInscrits.get(i) != null) {
+                    animalsInscritsTemp.add(animauxInscrits.get(i));
+                }
             }
-        }
 
-        for (int i = 0; i < animalsInscrits.size(); i++) {
+            for (int i = 0; i < animauxInscrits.size(); i++) {
 
-            int indexAléa = (int) (Math.random() * animalsInscritsTemp.size());
-            Animal choisi = animalsInscritsTemp.remove(indexAléa);
+                int indexAléa = (int) (Math.random() * animalsInscritsTemp.size());
+                Animal choisi = animalsInscritsTemp.remove(indexAléa);
 
-            if (choisi != null) {
-                message += (i + 1) + ") " + choisi.getNom() + "\n";
+                if (choisi != null) {
+                    message += "\n\t\t" + (i + 1) + ") " + choisi.getNom();
+                }
+            }
+        } else {
+            message += "Le concour \"" + nom + "\" ne peut pas être lancé car ";
+            if(animauxInscrits.size() == 1) {
+                message += "un seul animal y est inscrit.";
+            } else {
+                message += "aucun animal n'y est inscrit.";
             }
         }
         return message;

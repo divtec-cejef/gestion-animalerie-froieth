@@ -59,8 +59,8 @@ public class ConsoleIO {
                         "\t[6] Faire crier un animal\n" +
                         "\t[7] Faire crier tous les animaux\n" +
                         "\n-------------- Gestion des employés --------------\n\n" +
-                        "\t[8] Ajouter un soigneur\n" +
-                        "\t[9] Supprimer un emplyoé\n" +
+                        "\t[8] Ajouter un employé\n" +
+                        "\t[9] Supprimer un employé\n" +
                         "\t[10] Afficher les infos d'un employé\n" +
                         "\t[11] Afficher les infos de tous les employés\n" +
                         "\t[12] Ajouter une tâche à un employé\n" +
@@ -68,8 +68,9 @@ public class ConsoleIO {
                         "\t[13] Ajouter un concour\n" +
                         "\t[14] Supprimer un concour\n" +
                         "\t[15] Voir les infos d'un concour\n" +
-                        "\t[16] Inscrire un animal à un coucour\n" +
-                        "\t[17] Lancer un concour");
+                        "\t[16] Voir les infos de tous les concours\n" +
+                        "\t[17] Inscrire un animal à un coucour\n" +
+                        "\t[18] Lancer un concour");
     }
 
     /**
@@ -141,7 +142,7 @@ public class ConsoleIO {
                 animaux.remove(animalASupprimer - 1);
                 afficher( "L'animal a été supprimer."); break;
             case "n":
-            case "N": afficher("\nL'animal n'a pas été supprimer"); break;
+            case "N": afficher("L'animal n'a pas été supprimer"); break;
         }
     }
 
@@ -262,7 +263,7 @@ public class ConsoleIO {
                 employes.remove(employeASupprimer - 1);
                 afficher( "L'employé a été supprimer."); break;
             case "n":
-            case "N": afficher("\nL'employé n'a pas été supprimer"); break;
+            case "N": afficher("L'employé n'a pas été supprimer"); break;
         }
     }
 
@@ -303,6 +304,102 @@ public class ConsoleIO {
         afficherSansRetourLigne("\t\tAnimal à s'occuper : ");
         Animal animalASOccuper = animaux.get(readNextInt() - 1);
         afficher("\t\t" + employeAffecter.getNom() + " " + employeAffecter.getPrenom() + " " + employeAffecter.effectuerTache(animalASOccuper) + ".");
+    }
 
+    /**
+     * Affiche une liste contenant tous les concours
+     * @param concours Liste de tous les concours
+     * @return Une liste sous format textuel contenant tous les concours
+     */
+    public String afficherTousLesConcours(ArrayList<ConcourAnimalier> concours) {
+        String affichage = "\tConcours : \n";
+        for (int i = 0; i<concours.size(); i++) {
+            affichage += "\t\t[" + (i+1) + "]" + concours.get(i).getNom() + " (" + concours.get(i).getLieu() + ")\n";
+        }
+        return affichage;
+    }
+
+    /**
+     * Ajoute un concours à la liste donnée
+     * @param concours Liste de tous les concours
+     */
+    public void ajouterConcour(ArrayList<ConcourAnimalier> concours) {
+        afficherSansRetourLigne("\tNom : ");
+        String nom = readNextLine();
+        afficherSansRetourLigne("\tLieu : ");
+        String lieu = scanner.nextLine();
+        afficherSansRetourLigne("\tCapacité maximum : ");
+        int capacitéMax = readNextInt();
+        concours.add(new ConcourAnimalier(nom, lieu, capacitéMax));
+        afficher("\nLe concours " + nom + " a été ajouter.");
+    }
+
+    /**
+     * Supprime un concours de la liste donnée
+     * @param concours liste de tous les concours
+     */
+    public void supprimerConcour(ArrayList<ConcourAnimalier> concours) {
+        afficher(afficherTousLesConcours(concours));
+        afficherSansRetourLigne("\tConcour à supprimer : ");
+        int concourASupprimer =  readNextInt();
+        afficherSansRetourLigne("Êtes-vous sûr de vouloir supprimer le concour \"" + concours.get(concourASupprimer - 1).getNom() + "\" (o/n) : ");
+        switch(readNextLine()) {
+            case "o":
+            case "O":
+                concours.remove(concourASupprimer - 1);
+                afficher( "Le concour a été supprimer."); break;
+            case "n":
+            case "N": afficher("Le concour n'a pas été supprimer"); break;
+        }
+    }
+
+    /**
+     * Affiche les infos général d'un concour
+     * @param concours Liste de tous les concours
+     */
+    public void afficherInfosConcours(ArrayList<ConcourAnimalier> concours) {
+        afficher(afficherTousLesConcours(concours));
+        afficherSansRetourLigne("\tConcour à afficher les infos : ");
+        int concourAAffiche = readNextInt();
+        afficher(concours.get(concourAAffiche - 1));
+    }
+
+    /**
+     * Affiche les infos général de tous les concours
+     * @param concours Liste de tous les concours
+     */
+    public void afficherInfosTousConcours(ArrayList<ConcourAnimalier> concours) {
+        for(int i = 0; i < concours.size(); i++) {
+            afficher(concours.get(i));
+            if(i != concours.size() - 1) {
+                afficher("\t\t------------------------------");
+            }
+        }
+    }
+
+    /**
+     * Inscrit un animal d'une liste donnée à un concour d'une liste donnée
+     * @param animaux Liste de tous les animaux
+     * @param concours Liste de tous les concours
+     */
+    public void inscrireAnimalConcours(ArrayList<Animal> animaux, ArrayList<ConcourAnimalier> concours) {
+        afficher(afficherTousLesConcours(concours));
+        afficherSansRetourLigne("\t\tConcours à utiliser : ");
+        ConcourAnimalier concourAffecter = concours.get(readNextInt() - 1);
+        afficher(afficherTousLesAnimaux(animaux));
+        afficherSansRetourLigne("\t\tAnimal à inscrire : ");
+        Animal animalAInscrire = animaux.get(readNextInt() - 1);
+        concourAffecter.inscrireAnimal(animalAInscrire);
+        afficher("\t\t" + animalAInscrire.getNom() + " à été inscrit au concour \"" + concourAffecter.getNom() + "\"");
+    }
+
+    /**
+     * Lance un concours de la liste des concours donnée
+     * @param concours Liste de tous les concours
+     */
+    public void lancerConcours(ArrayList<ConcourAnimalier> concours) {
+        afficher(afficherTousLesConcours(concours));
+        afficherSansRetourLigne("Concour à lancer : ");
+        afficher(concours.get(readNextInt() - 1).lancerConcour());
     }
 }

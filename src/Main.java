@@ -8,7 +8,7 @@ public class Main {
         ArrayList<Animal> animaux = new ArrayList<>();
         // Instancie différents animaux
         animaux.add(new Chien("Ted", 7, étatSanté.SOIN_INTENSIF));
-        animaux.add(new Chat("Garfield", 3, étatSanté.SOIN_LEGER));
+        animaux.add(new Chat("Garfield", 3, étatSanté.SAIN));
         animaux.add(new Lapin("Bob", 1, étatSanté.SAIN));
 
         // Permet de gerer les employes
@@ -17,8 +17,18 @@ public class Main {
         employes.add(new Soigneur("Doe", "John", 4500));
         employes.add(new Vétérinaire("Dupont", "Martin", 6000));
 
+        // Permet de gerer les concours
+        ArrayList<ConcourAnimalier> concours = new ArrayList<>();
+        // Instancie différents concours
+        concours.add(new ConcourAnimalier("KingPet", "Porrentruy", 50));
+        for (int i = 0; i < animaux.size(); i++) {
+            concours.get(0).inscrireAnimal(animaux.get(i));
+        }
+        concours.add(new ConcourAnimalier("UCS", "Porrentruy", 200));
+
 
         console.afficherTableau();
+        while (true) {
         console.afficherSansRetourLigne("\n\nAction à réaliser : ");
         switch(console.readNextInt()) {
             case 1: console.ajouterAnimal(animaux); break;
@@ -33,8 +43,15 @@ public class Main {
             case 10: console.afficherInfosEmploye(employes); break;
             case 11: console.afficherInfosTousEmployes(employes); break;
             case 12: console.ajouterUneTache(animaux, employes); break;
+            case 13: console.ajouterConcour(concours); break;
+            case 14: console.supprimerConcour(concours); break;
+            case 15: console.afficherInfosConcours(concours); break;
+            case 16: console.afficherInfosTousConcours(concours); break;
+            case 17: console.inscrireAnimalConcours(animaux, concours); break;
+            case 18: console.lancerConcours(concours); break;
+            default: console.afficherTableau(); break;
         }
-
+        }
 
 
 
