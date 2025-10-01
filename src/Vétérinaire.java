@@ -7,7 +7,7 @@ public class Vétérinaire extends Employe {
      * @param salaire Le salaire du vétérinaire
      */
     public Vétérinaire(String nom, String prenom, int salaire) {
-        super(nom, prenom, salaire, "vétérinaire");
+        super(nom, prenom, salaire, "Vétérinaire");
     }
 
     /**
@@ -20,9 +20,9 @@ public class Vétérinaire extends Employe {
         } else if(animal.getSanté() == étatSanté.SOIN_LEGER){
             animal.setSanté(étatSanté.SAIN);
         } else {
-            return "";
+            return "ne peut pas soigner " + animal.getNom() + ", son état de santé est déjà sain.";
         }
-        return "Soigne " + animal.getNom();
+        return "soigne " + animal.getNom();
     }
 
 }

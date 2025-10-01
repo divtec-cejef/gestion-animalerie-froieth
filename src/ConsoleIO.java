@@ -50,29 +50,33 @@ public class ConsoleIO {
      */
     public void afficherTableau() {
         afficher(
-                    "-------------- Gestion des animaux --------------\n" +
-                        "[1] Ajouter un animal\n" +
-                        "[2] Supprimer un animal\n" +
-                        "[3] Modifier état de santé d'un animal\n" +
-                        "[4] Afficher les infos d'un animal\n" +
-                        "[5] Afficher les infos de tous les animaux\n" +
-                        "[6] Faire crier un animal\n" +
-                        "[7] Faire crier tous les animaux\n" +
-                        "\n-------------- Gestion des employés --------------\n" +
-                        "[8] Ajouter un soigneur\n" +
-                        "[9] Ajouter un vétérinaire\n" +
-                        "[10] Supprimer un vétérinaire\n" +
-                        "[11] Afficher les infos d'un employé\n" +
-                        "[12] Afficher les infos de tous les employés\n" +
-                        "[13] Ajouter une tâche à un employé\n" +
-                        "\n-------------- Gestion des concours --------------\n" +
-                        "[14] Ajouter un concour\n" +
-                        "[15] Supprimer un concour\n" +
-                        "[16] Voir les infos d'un concour\n" +
-                        "[17] Inscrire un animal à un coucour\n" +
-                        "[18] Lancer un concour");
+                    "-------------- Gestion des animaux ---------------\n\n" +
+                        "\t[1] Ajouter un animal\n" +
+                        "\t[2] Supprimer un animal\n" +
+                        "\t[3] Modifier état de santé d'un animal\n" +
+                        "\t[4] Afficher les infos d'un animal\n" +
+                        "\t[5] Afficher les infos de tous les animaux\n" +
+                        "\t[6] Faire crier un animal\n" +
+                        "\t[7] Faire crier tous les animaux\n" +
+                        "\n-------------- Gestion des employés --------------\n\n" +
+                        "\t[8] Ajouter un soigneur\n" +
+                        "\t[9] Supprimer un emplyoé\n" +
+                        "\t[10] Afficher les infos d'un employé\n" +
+                        "\t[11] Afficher les infos de tous les employés\n" +
+                        "\t[12] Ajouter une tâche à un employé\n" +
+                        "\n-------------- Gestion des concours --------------\n\n" +
+                        "\t[13] Ajouter un concour\n" +
+                        "\t[14] Supprimer un concour\n" +
+                        "\t[15] Voir les infos d'un concour\n" +
+                        "\t[16] Inscrire un animal à un coucour\n" +
+                        "\t[17] Lancer un concour");
     }
 
+    /**
+     * Affiche une liste contenant tous les animaux
+     * @param animaux Liste des animaux
+     * @return Une liste sous forme de chaîne de caractère contenant tous les animaux
+     */
     public String afficherTousLesAnimaux(ArrayList<Animal> animaux) {
         String affichage = "\tAnimaux : \n";
         for (int i = 0; i<animaux.size(); i++) {
@@ -81,6 +85,10 @@ public class ConsoleIO {
         return affichage;
     }
 
+    /**
+     * Affiche les états de santé disponible
+     * @return Une liste des états de santé
+     */
     public String afficherEtatSanté() {
         return  "\tÉtat de santé :\n" +
                 "\t\t[1] Sain\n" +
@@ -88,6 +96,10 @@ public class ConsoleIO {
                 "\t\t[3] Soin intensif";
     }
 
+    /**
+     * Ajoute un animal donné à la liste
+     * @param animaux Liste des animaux
+     */
     public void ajouterAnimal(ArrayList<Animal> animaux) {
         afficher("\tRace des animaux :\n" +
                 "\t\t[1] Chien\n" +
@@ -114,11 +126,15 @@ public class ConsoleIO {
         afficher("\nL'animal " + nom + " a été ajouter.");
     }
 
+    /**
+     * Supprime un animal donné de la liste
+     * @param animaux Liste des animaux
+     */
     public void supprimerAnimal(ArrayList<Animal> animaux) {
         afficher(afficherTousLesAnimaux(animaux));
         afficherSansRetourLigne("\tAnimal à supprimer : ");
         int animalASupprimer =  readNextInt();
-        afficherSansRetourLigne("Êtes-vous sûr de vouloir supprmer \"" + animaux.get(animalASupprimer - 1).getNom() + "\" (o/n) : ");
+        afficherSansRetourLigne("Êtes-vous sûr de vouloir supprimer \"" + animaux.get(animalASupprimer - 1).getNom() + "\" (o/n) : ");
         switch(readNextLine()) {
             case "o":
             case "O":
@@ -129,6 +145,10 @@ public class ConsoleIO {
         }
     }
 
+    /**
+     * Modifie l'état de santé d'un animal donné
+     * @param animaux Liste des animaux
+     */
     public void modifierEtatSanté(ArrayList<Animal> animaux) {
         afficher(afficherTousLesAnimaux(animaux));
         afficherSansRetourLigne("\tAnimal à modifier l'état de santé : ");
@@ -146,6 +166,10 @@ public class ConsoleIO {
         afficher("\nL'état de santé de " + animaux.get(animalAModifEtat - 1).getNom() + " a été modifié.");
     }
 
+    /**
+     * Affiche les infos générales d'un animal donné
+     * @param animaux Liste des animaux
+     */
     public void afficherInfosAnimal(ArrayList<Animal> animaux) {
         afficher(afficherTousLesAnimaux(animaux));
         afficherSansRetourLigne("\tAnimal à afficher les infos : ");
@@ -153,6 +177,10 @@ public class ConsoleIO {
         afficher(animaux.get(animalAAffiche - 1));
     }
 
+    /**
+     * Affiche les infos générales de tous les animaux
+     * @param animaux Liste des animaux
+     */
     public void afficherInfosTousAnimaux(ArrayList<Animal> animaux) {
         for(int i = 0; i < animaux.size(); i++) {
             afficher(animaux.get(i));
@@ -162,6 +190,10 @@ public class ConsoleIO {
         }
     }
 
+    /**
+     * Affiche le bruit que fait un animal donné
+     * @param animaux Liste des animaux
+     */
     public void faireCrierAnimal(ArrayList<Animal> animaux) {
         afficher(afficherTousLesAnimaux(animaux));
         afficherSansRetourLigne("\tAnimal à faire crier : ");
@@ -169,9 +201,108 @@ public class ConsoleIO {
         afficher("\t\t" + animaux.get(animalAFaireCrier - 1).faireBruit());
     }
 
+    /**
+     * Affiche le bruit que font tous les animaux
+     * @param animaux Liste des animaux
+     */
     public void faireCrierTousAnimaux(ArrayList<Animal> animaux) {
         for(int i = 0; i < animaux.size(); i++) {
             afficher("\t" + animaux.get(i).faireBruit());
         }
+    }
+
+    /**
+     * Affiche une liste contenant tous les employés
+     * @param employes Liste de tous les employés
+     * @return Une liste sous forme de chaîne de caractère contenant tous les employés
+     */
+    public String afficherTousLesEmployes(ArrayList<Employe> employes){
+        String affichage = "\tEmployés : \n";
+        for (int i = 0; i<employes.size(); i++) {
+            affichage += "\t\t[" + (i+1) + "]" + employes.get(i).getNom() + " " + employes.get(i).getPrenom() + " (" + employes.get(i).getRôle() + ")\n";
+        }
+        return affichage;
+    }
+
+    /**
+     * Ajoute un employé à la liste donnée
+     * @param employes Liste de tous les employés
+     */
+    public void ajouterEmploye(ArrayList<Employe> employes) {
+        afficher("\tType d'employé :\n" +
+                "\t\t[1] Soigneur\n" +
+                "\t\t[2] Vétérinaire\n");
+        afficherSansRetourLigne("\tRôle : ");
+        int role = readNextInt();
+        afficherSansRetourLigne("\tNom : ");
+        String nom = readNextLine();
+        afficherSansRetourLigne("\tPrénom : ");
+        String prenom = scanner.nextLine();
+        afficherSansRetourLigne("\tSalaire : ");
+        int salaire = readNextInt();
+        switch(role) {
+            case 1: employes.add(new Soigneur(nom, prenom, salaire)); break;
+            case 2: employes.add(new Vétérinaire(nom, prenom, salaire)); break;
+        }
+        afficher("\nL'employé " + nom + " " + prenom + " a été ajouter.");
+    }
+
+    /**
+     * Supprime un employé donné de la liste
+     * @param employes liste de tous les employés
+     */
+    public void supprimerEmploye(ArrayList<Employe> employes) {
+        afficher(afficherTousLesEmployes(employes));
+        afficherSansRetourLigne("\tEmployé à supprimer : ");
+        int employeASupprimer =  readNextInt();
+        afficherSansRetourLigne("Êtes-vous sûr de vouloir supprimer \"" + employes.get(employeASupprimer - 1).getNom() + " " + employes.get(employeASupprimer - 1).getPrenom() + "\" (o/n) : ");
+        switch(readNextLine()) {
+            case "o":
+            case "O":
+                employes.remove(employeASupprimer - 1);
+                afficher( "L'employé a été supprimer."); break;
+            case "n":
+            case "N": afficher("\nL'employé n'a pas été supprimer"); break;
+        }
+    }
+
+    /**
+     * Affiche les infos générales d'un employé donné
+     * @param employes Liste de tous les employé
+     */
+    public void afficherInfosEmploye(ArrayList<Employe> employes) {
+        afficher(afficherTousLesEmployes(employes));
+        afficherSansRetourLigne("\tEmployé à afficher les infos : ");
+        int employeAAffiche = readNextInt();
+        afficher(employes.get(employeAAffiche - 1));
+    }
+
+    /**
+     * Affiche les infos générales de tous les employés
+     * @param employes Liste de tous les employés
+     */
+    public void afficherInfosTousEmployes(ArrayList<Employe> employes) {
+        for(int i = 0; i < employes.size(); i++) {
+            afficher(employes.get(i));
+            if(i != employes.size() - 1) {
+                afficher("\t\t------------------------------");
+            }
+        }
+    }
+
+    /**
+     * Affecte une tâche à un employé
+     * @param animaux Liste de tous les animaux
+     * @param employes Liste de tous les employés
+     */
+    public void ajouterUneTache(ArrayList<Animal> animaux, ArrayList<Employe> employes) {
+        afficher(afficherTousLesEmployes(employes));
+        afficherSansRetourLigne("\t\tEmployé à affecter la tacher : ");
+        Employe employeAffecter = employes.get(readNextInt() - 1);
+        afficher(afficherTousLesAnimaux(animaux));
+        afficherSansRetourLigne("\t\tAnimal à s'occuper : ");
+        Animal animalASOccuper = animaux.get(readNextInt() - 1);
+        afficher("\t\t" + employeAffecter.getNom() + " " + employeAffecter.getPrenom() + " " + employeAffecter.effectuerTache(animalASOccuper) + ".");
+
     }
 }

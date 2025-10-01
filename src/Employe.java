@@ -24,7 +24,22 @@ public abstract class Employe {
      */
     @Override
     public String toString() {
-        return "Nom : " + prenom + " " + nom + "\nRôle : " + rôle + "\nSalaire : " + salaire + ".-";
+        return "\t\tNom : " + nom +
+                "\n\t\tPrénom : " + prenom +
+                "\n\t\tRôle : " + rôle +
+                "\n\t\tSalaire : " + salaire + ".-";
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getRôle() {
+        return rôle;
     }
 
     public abstract String effectuerTache(Animal animal);

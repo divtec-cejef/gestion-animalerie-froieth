@@ -4,10 +4,18 @@ public class Main {
     public static void main(String[] args) {
 
         ConsoleIO console = new ConsoleIO();
-        ArrayList<Animal> animaux = new ArrayList<Animal>();
+        // Permet de gerer les animaux
+        ArrayList<Animal> animaux = new ArrayList<>();
+        // Instancie différents animaux
         animaux.add(new Chien("Ted", 7, étatSanté.SOIN_INTENSIF));
         animaux.add(new Chat("Garfield", 3, étatSanté.SOIN_LEGER));
         animaux.add(new Lapin("Bob", 1, étatSanté.SAIN));
+
+        // Permet de gerer les employes
+        ArrayList<Employe> employes = new ArrayList<>();
+        // Instancie différents employés
+        employes.add(new Soigneur("Doe", "John", 4500));
+        employes.add(new Vétérinaire("Dupont", "Martin", 6000));
 
 
         console.afficherTableau();
@@ -20,6 +28,11 @@ public class Main {
             case 5: console.afficherInfosTousAnimaux(animaux); break;
             case 6: console.faireCrierAnimal(animaux); break;
             case 7: console.faireCrierTousAnimaux(animaux); break;
+            case 8: console.ajouterEmploye(employes); break;
+            case 9: console.supprimerEmploye(employes); break;
+            case 10: console.afficherInfosEmploye(employes); break;
+            case 11: console.afficherInfosTousEmployes(employes); break;
+            case 12: console.ajouterUneTache(animaux, employes); break;
         }
 
 
